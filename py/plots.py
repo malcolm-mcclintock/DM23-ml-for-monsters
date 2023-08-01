@@ -377,7 +377,7 @@ def grad_line(x, x1, y1,f_polynomial_gradient):
     return f_polynomial_gradient(x1)*(x - x1) + y1
 
 def plot_tangent_at_points(xs, ys,f_polynomial,f_polynomial_gradient,x_vals):
-    plot_function(xs, ys, [-5,5], [-1,25], 'Plot of tangent lines at -4, 0, and 4',1)
+    plot_function(xs, ys, [-5,5], [-10,10], 'Plot of Tangent Points',1)
     for x1 in x_vals:
         y1 = f_polynomial(x1)
         # Define x data range for tangent line

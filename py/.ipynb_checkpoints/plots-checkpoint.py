@@ -6,6 +6,7 @@ import seaborn as sns
 import string
 
 from networkx.drawing.nx_agraph import graphviz_layout
+from activations import *
 
 def make_color_map_without_replacement(G):
     color_map = []
@@ -309,6 +310,40 @@ def plot_entropy(coin_entropies, max_entr=False):
     plt.grid()
     plt.show()
     
+def plot_activations(x):
+    # Get y for each activation functions
+    y1 = binaryStep(x)
+    y2 = linear(x)
+    y3 = sigmoid(x)
+    y4 = RELU(x)
+    y5 = tanh(x)
+    y6 = softmax(x)
+
+    # Initialise the subplot function using number of rows and columns
+    fig, ax = plt.subplots(2, 3, figsize = (15, 9))
+
+    ax[0, 0].plot(x, y1)
+    ax[0, 0].set_title("binaryStep")
+
+    ax[0, 1].plot(x, y2)
+    ax[0, 1].set_title("linear")
+
+    ax[1, 0].plot(x, y3)
+    ax[1, 0].set_title("sigmoid")
+
+    ax[1, 1].plot(x, y4)
+    ax[1, 1].set_title("RELU")
+
+    ax[0, 2].plot(x, y5)
+    ax[0, 2].set_title("tanh")
+
+    ax[1, 2].plot(x, y6)
+    ax[1, 2].set_title("softmax")
+
+    # Combine all the operations and display
+    fig.suptitle('Activation Functions for Neural Networks', fontsize=20)
+    plt.show()
+    
 def set_grad_plot_fig_ax():
     fig, ax = plt.subplots(figsize=(15,9))
     return fig, ax
@@ -342,7 +377,7 @@ def grad_line(x, x1, y1,f_polynomial_gradient):
     return f_polynomial_gradient(x1)*(x - x1) + y1
 
 def plot_tangent_at_points(xs, ys,f_polynomial,f_polynomial_gradient,x_vals):
-    plot_function(xs, ys, [-5,5], [-1,25], 'Plot of tangent lines at -4, 0, and 4',1)
+    plot_function(xs, ys, [-5,5], [-10,10], 'Plot of Tangent Points',1)
     for x1 in x_vals:
         y1 = f_polynomial(x1)
         # Define x data range for tangent line
